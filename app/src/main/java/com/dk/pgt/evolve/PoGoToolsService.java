@@ -14,8 +14,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -31,8 +29,6 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.Observable;
 
 public class PoGoToolsService extends Service implements EvolveContract.View {
@@ -46,12 +42,8 @@ public class PoGoToolsService extends Service implements EvolveContract.View {
                     .FLAG_DIM_BEHIND,
             PixelFormat.TRANSLUCENT);
 
-    @BindView(R.id.floater_icon)
-    ImageView mFloaterIcon;
-    @BindView(R.id.pokemonName)
-    SearchView mPokemonName;
-    @BindView(R.id.progressIndicator)
-    LinearLayout mProgressIndicator;
+    private EvolveBinding mBinding;
+
     @Inject
     EvolveContract.Presenter mPresenter;
     private WindowManager mWindowManager;
@@ -101,11 +93,9 @@ public class PoGoToolsService extends Service implements EvolveContract.View {
     }
 
     private void setupBindings() {
-        ButterKnife.bind(this, mFloater);
-
-        EvolveBinding binding = EvolveBinding.bind(mFloater);
+        mBinding = EvolveBinding.bind(mFloater);
         mViewModel = new EvolveViewModel(mPresenter);
-        binding.setViewModel(mViewModel);
+        mBinding.setViewModel(mViewModel);
 
         setupSuggestions();
     }
@@ -120,8 +110,8 @@ public class PoGoToolsService extends Service implements EvolveContract.View {
                 from,
                 to,
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-        mPokemonName.setSuggestionsAdapter(mPokemonAdapter);
-        mPokemonName.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+        mBinding.pokemonName.setSuggestionsAdapter(mPokemonAdapter);
+        mBinding.pokemonName.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
             public boolean onSuggestionSelect(int position) {
                 mPresenter.getSelectedPokemon(position);
@@ -135,7 +125,7 @@ public class PoGoToolsService extends Service implements EvolveContract.View {
             }
         });
 
-        mPokemonName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mBinding.pokemonName.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -181,7 +171,7 @@ public class PoGoToolsService extends Service implements EvolveContract.View {
 
     @Override
     public void showSelectedPokemon(Pokemon selectedPokemon) {
-        mPokemonName.setQuery(selectedPokemon.getName(), false);
+        mBinding.pokemonName.setQuery(selectedPokemon.getName(), false);
     }
 
     @Override
@@ -191,7 +181,7 @@ public class PoGoToolsService extends Service implements EvolveContract.View {
 
     @Override
     public void setIndicatorVisible(boolean isVisible) {
-        mProgressIndicator.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        mBinding.progressIndicator.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -201,7 +191,7 @@ public class PoGoToolsService extends Service implements EvolveContract.View {
     }
 
     private void setupMotionHandler() {
-        mFloaterIcon.setOnTouchListener(new View.OnTouchListener() {
+        mBinding.floaterIcon.setOnTouchListener(new View.OnTouchListener() {
             private static final double MOTION_THRESHOLD = 2000;
             private static final double BOTTOM_SCREEN_PERCENTAGE_TO_DESTROY = 0.9;
             private int initialX;

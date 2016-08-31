@@ -34,9 +34,10 @@ public class EvolvePresenter implements EvolveContract.Presenter {
             return;
         }
 
-        mPoGoApi.getEvolutions(mSelectedPokemon.getNumber(), currentCp).subscribe(evolutions -> {
-            mView.showEvolutions(evolutions);
-        }, throwable -> mView.presentError(throwable.getMessage()));
+        mPoGoApi.getEvolutions(mSelectedPokemon.getNumber(), currentCp)
+                .subscribe(
+                        evolutions -> mView.showEvolutions(evolutions),
+                        throwable -> mView.presentError(throwable.getMessage()));
     }
 
     @Override

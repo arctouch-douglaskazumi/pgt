@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface EvolveContract {
-    interface Presenter{
+    interface Presenter {
         void calculateEvolutions(int currentCp);
 
         void loadPokemons();
@@ -20,7 +20,7 @@ public interface EvolveContract {
         void getSelectedPokemon(int selectedIndex);
     }
 
-    interface View{
+    interface View {
         void showEvolutions(List<Evolution> evolutions);
 
         void updateSuggestions(List<Pokemon> pokemons);

@@ -13,7 +13,7 @@ import android.view.View;
 import com.dk.pgt.databinding.ActivityMainBinding;
 import com.dk.pgt.evolve.PoGoToolsService;
 
-public class MainActivity extends AppCompatActivity implements MainHandler {
+public class MainActivity extends AppCompatActivity implements MainView {
 
     public static int OVERLAY_PERMISSION_REQ_CODE = 1234;
 
@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity implements MainHandler {
         super.onCreate(savedInstanceState);
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setMainHandler(this);
+        binding.setMainView(this);
     }
 
-    public void clicked(View view) {
+    public void launchService(View view) {
         if (canDrawOverlays(MainActivity.this))
             startService(new Intent(MainActivity.this, PoGoToolsService.class));
         else {

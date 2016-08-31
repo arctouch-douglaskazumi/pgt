@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="mainHandler"
-            type="com.dk.pgt.MainHandler"/>
+            name="mainView"
+            type="com.dk.pgt.MainView"/>
 
     </data>
 
@@ -22,7 +22,7 @@
 
         <Button
             android:id="@+id/button"
-            android:onClick="@{mainHandler::clicked}"
+            android:onClick="@{mainView::launchService}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
