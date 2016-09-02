@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.dk.pgt.databinding.ActivityMainBinding;
-import com.dk.pgt.evolve.PoGoToolsService;
+import com.dk.pgt.floater.PoGoToolsService;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public static boolean canDrawOverlays(Context context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
-        } else {
-            return Settings.canDrawOverlays(context);
         }
+
+        return Settings.canDrawOverlays(context);
     }
 
     @Override

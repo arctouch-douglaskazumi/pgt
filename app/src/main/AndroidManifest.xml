@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.dk.pgt.evolve.PoGoToolsService"/>
+        <service android:name="com.dk.pgt.floater.PoGoToolsService"/>
 
     </application>
 

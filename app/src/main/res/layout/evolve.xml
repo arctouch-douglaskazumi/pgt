@@ -2,78 +2,45 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.dk.pgt.evolve.EvolveViewModel"/>
     </data>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="200dp">
+        android:id="@+id/form"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/floater_icon"
+        <SearchView
+            android:id="@+id/pokemonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_weight="1"
+            android:ems="10"
+            android:iconifiedByDefault="false"
+            android:nextFocusDown="@+id/currentCp"
+            android:queryHint="@string/pokemon_name"/>
 
-        <FrameLayout
-            android:background="@drawable/round_black_shape"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{viewModel.formVisibility}">
+        <EditText
+            android:id="@+id/currentCp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/cp"
+            android:inputType="number"
+            android:text="@={viewModel.currentCp}"/>
 
-            <LinearLayout
-                android:id="@+id/form"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <SearchView
-                    android:id="@+id/pokemonName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:iconifiedByDefault="false"
-                    android:nextFocusDown="@+id/currentCp"
-                    android:queryHint="@string/pokemon_name"/>
-
-                <EditText
-                    android:id="@+id/currentCp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="@string/cp"
-                    android:inputType="number"
-                    android:text="@={viewModel.currentCp}"/>
-
-                <Button
-                    android:id="@+id/evolveButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="@{()->viewModel.calculateEvolutions()}"
-                    android:text="@string/evolve"/>
-            </LinearLayout>
-
-            <LinearLayout android:background="@color/transparentBlack"
-                android:id="@+id/progressIndicator"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ProgressBar
-                    android:id="@+id/pbHeaderProgress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                </ProgressBar>
-            </LinearLayout>
-        </FrameLayout>
+        <Button
+            android:id="@+id/evolveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="@{()->viewModel.calculateEvolutions()}"
+            android:text="@string/evolve"/>
     </LinearLayout>
 </layout>

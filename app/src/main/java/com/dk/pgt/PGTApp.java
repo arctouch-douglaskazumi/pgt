@@ -12,11 +12,17 @@ import com.dk.pgt.data.DataModule;
 
 public class PGTApp extends Application {
     public static final String PGT = "PGT";
+    private static PGTApp instace;
     private DataComponent mDataComponent;
+
+    public static PGTApp getInstance() {
+        return instace;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instace = this;
 
         mDataComponent = DaggerDataComponent.builder()
                 .dataModule(new DataModule())

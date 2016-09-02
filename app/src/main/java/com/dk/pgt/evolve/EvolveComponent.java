@@ -12,6 +12,6 @@ import dagger.Component;
 @ServiceScope
 @Component(dependencies = DataComponent.class, modules = EvolveModule.class)
 public interface EvolveComponent {
-    void inject(PoGoToolsService service);
+    void inject(EvolveView evolveView);
 }
 
