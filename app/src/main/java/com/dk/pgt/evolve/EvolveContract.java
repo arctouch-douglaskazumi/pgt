@@ -2,6 +2,7 @@ package com.dk.pgt.evolve;
 
 import com.dk.pgt.data.PoGoApi.Evolution;
 import com.dk.pgt.data.PokeApi.Pokemon;
+import com.dk.pgt.floater.FloaterContract;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 
 public interface EvolveContract {
-    interface Presenter {
+    interface Presenter extends FloaterContract.Presenter {
         void calculateEvolutions(int currentCp);
 
         void loadPokemons();
@@ -20,15 +21,11 @@ public interface EvolveContract {
         void getSelectedPokemon(int selectedIndex);
     }
 
-    interface View {
+    interface View extends FloaterContract.View {
         void showEvolutions(List<Evolution> evolutions);
 
         void updateSuggestions(List<Pokemon> pokemons);
 
         void showSelectedPokemon(Pokemon selectedPokemon);
-
-        void presentError(String errorMessage);
-
-        void setIndicatorVisible(boolean isVisible);
     }
 }
