@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.MatrixCursor;
 import android.provider.BaseColumns;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
@@ -12,7 +13,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.dk.pgt.PGTApp;
-import com.dk.pgt.R;
 import com.dk.pgt.data.PoGoApi.Evolution;
 import com.dk.pgt.data.PokeApi.Pokemon;
 import com.dk.pgt.databinding.EvolveBinding;
@@ -24,6 +24,8 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import rx.Observable;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * Created by douglaskazumi on 8/31/16.
@@ -42,9 +44,9 @@ public class EvolveView extends LinearLayout implements EvolveContract.View {
 
     public EvolveView(Context context, FloaterViewModel parentViewModel) {
         super(context);
+        this.setOrientation(VERTICAL);
         this.context = context;
         this.parentViewModel = parentViewModel;
-        View.inflate(context, R.layout.evolve, this);
 
         setupInjection();
         setupBindings();
@@ -107,7 +109,8 @@ public class EvolveView extends LinearLayout implements EvolveContract.View {
     }
 
     private void setupBindings() {
-        mBinding = EvolveBinding.bind(this.getChildAt(0));
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+        mBinding = EvolveBinding.inflate(inflater, this, true);
         mViewModel = new EvolveViewModel(mPresenter);
         mBinding.setViewModel(mViewModel);
     }

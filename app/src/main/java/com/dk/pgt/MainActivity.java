@@ -31,12 +31,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMainView(this);
+
+        launchService(null);
     }
 
     public void launchService(View view) {
-        if (canDrawOverlays(MainActivity.this))
+        if (canDrawOverlays(MainActivity.this)) {
             startService(new Intent(MainActivity.this, PoGoToolsService.class));
-        else {
+            finish();
+        }
+        else{
             requestPermission(OVERLAY_PERMISSION_REQ_CODE);
         }
     }

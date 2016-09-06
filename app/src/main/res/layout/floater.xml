@@ -20,7 +20,7 @@
             android:src="@mipmap/ic_launcher"/>
 
         <FrameLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/round_black_shape"
             android:visibility="@{viewModel.formVisibility}">
@@ -28,14 +28,14 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:id="@+id/content"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/progressIndicator"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="match_parent"
                 android:background="@color/transparentBlack"
                 android:gravity="center"
                 android:orientation="vertical"

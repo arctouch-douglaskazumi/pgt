@@ -17,14 +17,19 @@ import com.dk.pgt.R;
 import com.dk.pgt.databinding.FloaterBinding;
 import com.dk.pgt.evolve.EvolveView;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE;
+import static android.view.WindowManager.LayoutParams.TYPE_PHONE;
+
 public class PoGoToolsService extends Service {
 
     private final WindowManager.LayoutParams mParams = new WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams
-                    .FLAG_DIM_BEHIND,
+            WRAP_CONTENT,
+            WRAP_CONTENT,
+            TYPE_PHONE,
+            SOFT_INPUT_STATE_VISIBLE | FLAG_DIM_BEHIND,
             PixelFormat.TRANSLUCENT);
 
     private WindowManager mWindowManager;
@@ -53,7 +58,14 @@ public class PoGoToolsService extends Service {
         viewModel = new FloaterViewModel();
         binding.setViewModel(viewModel);
 
-        binding.content.addView(new EvolveView(this, viewModel));
+        binding.content.addView(
+                new EvolveView(this, viewModel),
+                new WindowManager.LayoutParams(
+                        MATCH_PARENT,
+                        MATCH_PARENT,
+                        TYPE_PHONE,
+                        SOFT_INPUT_STATE_VISIBLE,
+                        PixelFormat.TRANSLUCENT));
 
         mParams.gravity = Gravity.TOP | Gravity.LEFT;
         mParams.x = 0;

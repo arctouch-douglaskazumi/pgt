@@ -63,10 +63,12 @@ public class EvolvePresenter implements EvolveContract.Presenter {
                         pokemon.getName().toLowerCase().contains(queryText.toLowerCase()))
                 .limit(MAX_SUGGESTIONS)
                 .toList()
-                .subscribe(pokemons -> {
-                    mFilteredPokemons = pokemons;
-                    mView.updateSuggestions(mFilteredPokemons);
-                });
+                .subscribe(
+                        pokemons -> {
+                            mFilteredPokemons = pokemons;
+                            mView.updateSuggestions(mFilteredPokemons);
+                        },
+                        throwable -> mView.presentError(throwable.getMessage()));
     }
 
     @Override

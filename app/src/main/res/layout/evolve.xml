@@ -8,16 +8,15 @@
             type="com.dk.pgt.evolve.EvolveViewModel"/>
     </data>
 
-    <LinearLayout
+    <merge
         android:id="@+id/form"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <SearchView
             android:id="@+id/pokemonName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
             android:iconifiedByDefault="false"
@@ -26,8 +25,8 @@
 
         <EditText
             android:id="@+id/currentCp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_weight="1"
             android:ems="10"
@@ -38,9 +37,10 @@
         <Button
             android:id="@+id/evolveButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_gravity="bottom"
             android:onClick="@{()->viewModel.calculateEvolutions()}"
             android:text="@string/evolve"/>
-    </LinearLayout>
+    </merge>
 </layout>

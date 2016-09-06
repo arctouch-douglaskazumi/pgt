@@ -7,6 +7,10 @@ import android.view.WindowManager;
 
 import com.dk.pgt.BR;
 
+import static android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+import static android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE;
+
 /**
  * Created by douglaskazumi on 8/21/16.
  */
@@ -39,8 +43,7 @@ public class FloaterViewModel extends BaseObservable {
         boolean isShown = mFormVisibility == View.GONE;
         setFormVisibility(isShown ? View.VISIBLE : View.GONE);
         params.flags = isShown
-                ? WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager
-                .LayoutParams.FLAG_DIM_BEHIND
-                : WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                ? SOFT_INPUT_STATE_VISIBLE | FLAG_DIM_BEHIND
+                : FLAG_NOT_FOCUSABLE;
     }
 }
