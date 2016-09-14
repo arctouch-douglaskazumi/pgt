@@ -8,7 +8,7 @@
             type="com.dk.pgt.floater.FloaterViewModel"/>
     </data>
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="200dp">
@@ -21,7 +21,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/round_black_shape"
             android:visibility="@{viewModel.formVisibility}">
 
@@ -30,11 +30,16 @@
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <Button android:id="@+id/swapButton"
+                    android:text="Change"
+                    android:onClick="@{() -> viewModel.changeView()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/progressIndicator"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/transparentBlack"
                 android:gravity="center"

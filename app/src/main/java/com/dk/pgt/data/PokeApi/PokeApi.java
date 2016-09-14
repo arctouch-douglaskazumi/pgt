@@ -2,7 +2,6 @@ package com.dk.pgt.data.PokeApi;
 
 import com.google.gson.Gson;
 
-import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -12,14 +11,12 @@ import rx.Observable;
  */
 
 public class PokeApi implements PokemonApi {
-    private static final String BASE_URL = "http://pokeapi.co/api/v2/";
+    public static final String BASE_URL = "http://pokeapi.co/api/v2/";
 
     PokeApiRetrofit mApi;
 
-    public PokeApi(Retrofit.Builder retrofit) {
-        this.mApi = retrofit
-                .baseUrl(BASE_URL).build()
-                .create(PokeApiRetrofit.class);
+    public PokeApi(PokeApiRetrofit retrofit) {
+        this.mApi = retrofit;
     }
 
 
@@ -654,7 +651,7 @@ public class PokeApi implements PokemonApi {
 //                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    interface PokeApiRetrofit {
+    public interface PokeApiRetrofit {
         @GET("pokemon/")
         Observable<PokeApiResponse<Pokemon>> getPokemons(@Query("limit") Integer limit, @Query
                 ("offset") Integer offset);

@@ -1,4 +1,4 @@
-package com.dk.pgt.evolve;
+package com.dk.pgt.iv;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,18 +6,16 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.dk.pgt.PGTApp;
-import com.dk.pgt.data.PoGoApi.Evolution;
-import com.dk.pgt.databinding.EvolveBinding;
+import com.dk.pgt.data.PgoivApi.PgoivApiResponse;
+import com.dk.pgt.data.PgoivApi.SummaryData;
+import com.dk.pgt.databinding.IvCalcBinding;
 import com.dk.pgt.floater.FloaterViewModel;
 import com.dk.pgt.pokemonSearch.PokemonSearchContract;
 import com.dk.pgt.pokemonSearch.PokemonSearchView;
 
-import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
-
-import rx.Observable;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -25,26 +23,30 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
  * Created by douglaskazumi on 8/31/16.
  */
 
-public class EvolveView extends PokemonSearchView implements EvolveContract.View {
+public class IvView extends PokemonSearchView implements IvContract.View {
     @Inject
-    EvolveContract.Presenter presenter;
-    private EvolveBinding binding;
+    IvContract.Presenter presenter;
+    private IvCalcBinding binding;
 
-    public EvolveView(Context context, FloaterViewModel parentViewModel) {
+    public IvView(Context context, FloaterViewModel parentViewModel) {
         super(context, parentViewModel);
     }
 
     @Override
-    public void showEvolutions(List<Evolution> evolutions) {
+    public void showResult(PgoivApiResponse response) {
         StringBuilder builder = new StringBuilder();
-
-        Observable.from(evolutions)
-                .map(evo -> String.format(Locale.US,
-                        "%s: %d%s",
-                        evo.getName(),
-                        evo.getCpEstimate(),
-                        System.lineSeparator()))
-                .subscribe(builder::append);
+        SummaryData data = response.getData();
+        builder.append(
+                String.format(Locale.US,
+                        "Perfection: %.2f - %.2f",
+                        data.getMinPerfection(),
+                        data.getMaxPerfection()));
+        builder.append(System.lineSeparator());
+        builder.append(
+                String.format(Locale.US,
+                        "Evolution CP: %d - %d",
+                        data.getMinEstimatedEvolutionCp(),
+                        data.getMaxEstimatedEvolutionCp()));
 
         Toast.makeText(context, builder.toString().trim(), Toast.LENGTH_LONG)
                 .show();
@@ -64,15 +66,15 @@ public class EvolveView extends PokemonSearchView implements EvolveContract.View
     protected void setupBinding() {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService
                 (LAYOUT_INFLATER_SERVICE);
-        binding = EvolveBinding.inflate(inflater, this, true);
-        binding.setViewModel(new EvolveViewModel(presenter));
+        binding = IvCalcBinding.inflate(inflater, this, true);
+        binding.setViewModel(new IvViewModel(presenter));
     }
 
     @Override
     protected void setupInjection() {
-        DaggerEvolveComponent.builder()
+        DaggerIvComponent.builder()
                 .dataComponent(PGTApp.getInstance().getDataComponent())
-                .evolveModule(new EvolveModule(this))
+                .ivModule(new IvModule(this))
                 .build()
                 .inject(this);
     }

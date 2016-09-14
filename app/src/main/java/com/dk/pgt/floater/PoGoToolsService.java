@@ -15,9 +15,7 @@ import android.view.WindowManager;
 import com.dk.pgt.PGTApp;
 import com.dk.pgt.R;
 import com.dk.pgt.databinding.FloaterBinding;
-import com.dk.pgt.evolve.EvolveView;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND;
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE;
@@ -55,17 +53,10 @@ public class PoGoToolsService extends Service {
         mFloater = layoutInflater.inflate(R.layout.floater, null);
 
         binding = FloaterBinding.bind(mFloater);
-        viewModel = new FloaterViewModel();
+        viewModel = new FloaterViewModel(this, binding);
         binding.setViewModel(viewModel);
 
-        binding.content.addView(
-                new EvolveView(this, viewModel),
-                new WindowManager.LayoutParams(
-                        MATCH_PARENT,
-                        MATCH_PARENT,
-                        TYPE_PHONE,
-                        SOFT_INPUT_STATE_VISIBLE,
-                        PixelFormat.TRANSLUCENT));
+        viewModel.changeView();
 
         mParams.gravity = Gravity.TOP | Gravity.LEFT;
         mParams.x = 0;

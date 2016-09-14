@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">PGT</string>
     <string name="cp">CP</string>
+    <string name="hp">HP</string>
     <string name="pokemon_name">Pokemon name</string>
     <string name="evolve">Evolve</string>
+    <string name="getIv">Get IV</string>
+    <string name="dust">Dust</string>
+    <string name="trainerLevel">Trainer Level</string>
 </resources>

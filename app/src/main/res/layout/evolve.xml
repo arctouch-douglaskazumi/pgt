@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_gravity="bottom"
-            android:onClick="@{()->viewModel.calculateEvolutions()}"
+            android:onClick="@{() -> viewModel.calculateEvolutions()}"
             android:text="@string/evolve"/>
     </merge>
 </layout>

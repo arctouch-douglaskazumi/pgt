@@ -3,6 +3,8 @@ package com.dk.pgt.data;
 import android.util.Log;
 
 import com.dk.pgt.PGTApp;
+import com.dk.pgt.data.PgoivApi.PgoivApi;
+import com.dk.pgt.data.PgoivApi.PoGoIvApi;
 import com.dk.pgt.data.PoGoApi.GameInfoApi;
 import com.dk.pgt.data.PoGoApi.PoGoApi;
 import com.dk.pgt.data.PokeApi.PokeApi;
@@ -21,6 +23,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * Created by douglaskazumi on 8/20/16.
@@ -71,12 +74,31 @@ public class DataModule {
     @Provides
     @Singleton
     PoGoApi providePoGoApi(Retrofit.Builder builder) {
-        return new GameInfoApi(builder);
+        GameInfoApi.GameInfoRetrofit gameInfoRetrofit = builder
+                .baseUrl(GameInfoApi.BASE_URL)
+                .build()
+                .create(GameInfoApi.GameInfoRetrofit.class);
+        return new GameInfoApi(gameInfoRetrofit);
     }
 
     @Provides
     @Singleton
     PokemonApi providePokemonApi(Retrofit.Builder builder) {
-        return new PokeApi(builder);
+        PokeApi.PokeApiRetrofit pokeApiRetrofit = builder
+                .baseUrl(PokeApi.BASE_URL)
+                .build()
+                .create(PokeApi.PokeApiRetrofit.class);
+        return new PokeApi(pokeApiRetrofit);
+    }
+
+    @Provides
+    @Singleton
+    PoGoIvApi providePoGoIvApi(Retrofit.Builder builder) {
+        PgoivApi.PgoivRetrofit pgoivRetrofit = builder
+//                .baseUrl(PgoivApi.BASE_URL)
+                .baseUrl("http://www.pgoiv.com/api/public/pokemon/")
+                .build()
+                .create(PgoivApi.PgoivRetrofit.class);
+        return new PgoivApi(pgoivRetrofit);
     }
 }

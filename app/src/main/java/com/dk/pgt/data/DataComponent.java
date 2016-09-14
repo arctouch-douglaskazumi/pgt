@@ -1,5 +1,6 @@
 package com.dk.pgt.data;
 
+import com.dk.pgt.data.PgoivApi.PoGoIvApi;
 import com.dk.pgt.data.PoGoApi.PoGoApi;
 import com.dk.pgt.data.PokeApi.PokemonApi;
 
@@ -16,4 +17,5 @@ import dagger.Component;
 public interface DataComponent {
     PoGoApi providePoGoApi();
     PokemonApi providePokemonApi();
+    PoGoIvApi providePoGoIvApi();
 }
