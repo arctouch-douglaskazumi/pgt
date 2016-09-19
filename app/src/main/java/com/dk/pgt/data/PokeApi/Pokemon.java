@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * Created by douglaskazumi on 8/20/16.
  */
 public class Pokemon {
-    private final String URL_NUMBER_PATTERN = "/\\d*/$";
+    private final String URL_NUMBER_PATTERN = "/\\d+/$";
     private String name;
 
     @SerializedName("url")

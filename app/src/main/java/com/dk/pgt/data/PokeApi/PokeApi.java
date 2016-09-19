@@ -20,7 +20,7 @@ public class PokeApi implements PokemonApi {
     }
 
 
-    class MockApi extends PokeApiResponse<Pokemon>{
+    public class MockApi extends PokeApiResponse<Pokemon>{
 
     }
 

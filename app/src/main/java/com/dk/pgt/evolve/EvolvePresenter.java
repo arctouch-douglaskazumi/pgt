@@ -20,14 +20,15 @@ public class EvolvePresenter extends PokemonSearchPresenter implements EvolveCon
 
     @Override
     public void calculateEvolutions(int currentCp) {
-        if (mSelectedPokemon == null) {
+        if (selectedPokemon == null) {
             view.presentError("Please select a Pokemon");
             return;
         }
 
-        poGoApi.getEvolutions(mSelectedPokemon.getNumber(), currentCp)
+        poGoApi.getEvolutions(selectedPokemon.getNumber(), currentCp)
                 .subscribe(
                         evolutions -> view.showEvolutions(evolutions),
                         throwable -> view.presentError(throwable.getMessage()));
     }
 }
+

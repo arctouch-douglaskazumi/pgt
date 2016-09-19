@@ -21,9 +21,6 @@ public class Evolution {
 
     private List<Integer> spread;
 
-    public Evolution() {
-    }
-
     public Evolution(int cpEstimate, List<Integer> cpRange, List<Double> levels, List<String>
             info, List<Integer> spread) {
         this.cpEstimate = cpEstimate;

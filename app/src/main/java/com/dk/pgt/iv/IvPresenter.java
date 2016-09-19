@@ -21,14 +21,14 @@ public class IvPresenter extends PokemonSearchPresenter implements IvContract.Pr
     @Override
     public void calculateIv(int currentCp, int currentHp, String requiredDust, int trainerLevel,
                             boolean isPowered) {
-        if (mSelectedPokemon == null) {
+        if (selectedPokemon == null) {
             view.presentError("Please select a Pokemon");
             return;
         }
 
         poGoIvApi
                 .getIvData(
-                        mSelectedPokemon.getName(), currentCp, currentHp,
+                        selectedPokemon.getName(), currentCp, currentHp,
                         requiredDust, trainerLevel, isPowered)
                 .subscribe(
                         response -> view.showResult(response),

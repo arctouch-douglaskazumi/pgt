@@ -17,7 +17,7 @@ public class PokemonSearchPresenter implements PokemonSearchContract.Presenter {
     private List<Pokemon> pokemons;
     private List<Pokemon> filteredPokemons;
     private PokemonSearchContract.View view;
-    protected Pokemon mSelectedPokemon;
+    protected Pokemon selectedPokemon;
 
     public PokemonSearchPresenter(PokemonSearchContract.View view, PokemonApi pokeApi) {
         this.view = view;
@@ -38,7 +38,7 @@ public class PokemonSearchPresenter implements PokemonSearchContract.Presenter {
     @Override
     public void filterSuggestions(String queryText) {
         if (queryText.isEmpty()) {
-            mSelectedPokemon = null;
+            selectedPokemon = null;
             filteredPokemons = null;
             return;
         }
@@ -59,8 +59,8 @@ public class PokemonSearchPresenter implements PokemonSearchContract.Presenter {
     @Override
     public void getSelectedPokemon(int selectedIndex) {
         if (filteredPokemons != null && filteredPokemons.size() > 0) {
-            mSelectedPokemon = filteredPokemons.get(selectedIndex);
-            view.showSelectedPokemon(mSelectedPokemon);
+            selectedPokemon = filteredPokemons.get(selectedIndex);
+            view.showSelectedPokemon(selectedPokemon);
         }
     }
 }
