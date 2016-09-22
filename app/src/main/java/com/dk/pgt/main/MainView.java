@@ -1,4 +1,4 @@
-package com.dk.pgt;
+package com.dk.pgt.main;
 
 import android.view.View;
 

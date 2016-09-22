@@ -56,17 +56,6 @@
             android:inputType="number"
             android:text="@={viewModel.requiredDust}"/>
 
-        <EditText
-            android:id="@+id/trainerLevel"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/trainerLevel"
-            android:inputType="number"
-            android:text="@={viewModel.trainerLevel}"/>
-
         <Button
             android:id="@+id/getIvButton"
             android:layout_width="match_parent"

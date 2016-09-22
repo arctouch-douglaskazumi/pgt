@@ -7,7 +7,7 @@ import com.dk.pgt.data.PgoivApi.PgoivApi;
 import com.dk.pgt.data.PgoivApi.PoGoIvApi;
 import com.dk.pgt.data.PoGoApi.GameInfoApi;
 import com.dk.pgt.data.PoGoApi.PoGoApi;
-import com.dk.pgt.data.PokeApi.PokeApi;
+import com.dk.pgt.data.PokeApi.MockPokeApi;
 import com.dk.pgt.data.PokeApi.PokemonApi;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -84,18 +84,19 @@ public class DataModule {
     @Provides
     @Singleton
     PokemonApi providePokemonApi(Retrofit.Builder builder) {
-        PokeApi.PokeApiRetrofit pokeApiRetrofit = builder
-                .baseUrl(PokeApi.BASE_URL)
-                .build()
-                .create(PokeApi.PokeApiRetrofit.class);
-        return new PokeApi(pokeApiRetrofit);
+//        PokeApi.PokeApiRetrofit pokeApiRetrofit = builder
+//                .baseUrl(PokeApi.BASE_URL)
+//                .build()
+//                .create(PokeApi.PokeApiRetrofit.class);
+//        return new PokeApi(pokeApiRetrofit);
+        return new MockPokeApi();
     }
 
     @Provides
     @Singleton
     PoGoIvApi providePoGoIvApi(Retrofit.Builder builder) {
         PgoivApi.PgoivRetrofit pgoivRetrofit = builder
-//                .baseUrl(PgoivApi.BASE_URL)
+//                .baseUrl(PgoivApi.BASE_URL) //Kotlin Java interoperability error
                 .baseUrl("http://www.pgoiv.com/api/public/pokemon/")
                 .build()
                 .create(PgoivApi.PgoivRetrofit.class);

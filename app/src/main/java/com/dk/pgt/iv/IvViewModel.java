@@ -16,7 +16,6 @@ public class IvViewModel extends BaseObservable {
     private String currentCp;
     private String currentHp;
     private String requiredDust;
-    private String trainerLevel;
 
     public IvViewModel(IvContract.Presenter mPresenter) {
         this.mPresenter = mPresenter;
@@ -43,16 +42,6 @@ public class IvViewModel extends BaseObservable {
     }
 
     @Bindable
-    public String getTrainerLevel() {
-        return trainerLevel;
-    }
-
-    public void setTrainerLevel(String trainerLevel) {
-        this.trainerLevel = trainerLevel;
-        notifyPropertyChanged(BR.trainerLevel);
-    }
-
-    @Bindable
     public String getCurrentCp() {
         return currentCp;
     }
@@ -67,7 +56,7 @@ public class IvViewModel extends BaseObservable {
             int currentCp = Integer.parseInt(this.currentCp);
             int currentHp = Integer.parseInt(this.currentHp);
             //TODO: Make the trainer level a pref
-            int trainerLevel = Integer.parseInt(this.trainerLevel);
+            int trainerLevel = 22;
             mPresenter.calculateIv(currentCp, currentHp, requiredDust, trainerLevel, false);
         } catch (NumberFormatException ex) {
             Log.e(PGTApp.PGT, ex.getMessage());
